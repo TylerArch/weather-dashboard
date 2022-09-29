@@ -31,7 +31,7 @@ function showSearchHistory() {
         console.log(i);
         const btn = document.createElement('button');
         btn.setAttribute('type', 'button');
-        btn.setAttribute('history-btn');
+        btn.setAttribute('class', 'history-btn');
 
         btn.setAttribute('data-search', historyArr[i]);
 
@@ -92,6 +92,7 @@ function searchButtonClick(event) {
     var city = formInput.value;
     getApi(city)
     console.log(formInput.value);
+    addToHistory(city);
 }
 
 getSearches();
