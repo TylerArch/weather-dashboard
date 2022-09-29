@@ -17,28 +17,39 @@ let currentDay = null;
 
 //Function
 function showSearchHistory() {
-    searchHistoryContainer.innerHTML = "";
+    console.log("Its working!");
+
+    if (searchHistoryContainer.innerHTML) {
+        console.log("Its working!");
+
+        searchHistoryContainer.innerHTML = "";
+    }
     //Checking search history array for previous searches and creating the amount of buttons equal to the elements in the array
     for (var i = historyArr.length -1; i >= 0; i--) {
-        var btn = document.createElement('button');
+        console.log("Its working!");
+
+        console.log(i);
+        const btn = document.createElement('button');
         btn.setAttribute('type', 'button');
         btn.setAttribute('history-btn');
 
         btn.setAttribute('data-search', historyArr[i]);
 
         btn.textContent = historyArr[i];
-        searchHistoryContainer.append(btn);
+        searchHistoryContainer.appendChild(btn);
     }
 }
 
-    //Function to update the search history in local storage
+//Function to update the search history in local storage
 function addToHistory(city) {
-        //If nothing was searched return
-    if(historyArr.indexOf(city) !== -1){
+    //If nothing was searched return
+    if(historyArr.indexOf(city) != -1){
+       console.log("Its working!");
             return;
     }
-    //If there is search history display it
+    //Push city to local storage in the history array
     historyArr.push(city);
+    console.log(historyArr);
     localStorage.setItem('search-history', JSON.stringify(historyArr));
     showSearchHistory();
 }
@@ -46,14 +57,17 @@ function addToHistory(city) {
 //Function to get the local storage items
 function getSearches() {
     var savedHistory = localStorage.getItem('search-history');
+    console.log("Its working!");
     if (savedHistory) {
-        historyArr = JSON.parse(savedHistory)
+        console.log("Its working!");
+        historyArr = JSON.parse(savedHistory);
+        console.log("nothing");
     } showSearchHistory();
 }
 
 //Function to get API
 function getApi(city) {
-    var city = input.value
+    // var city = formInput.value
     var requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=188a51d5f423814817d69f7e3e5961b3`;
 
     fetch(requestUrl)
@@ -65,21 +79,24 @@ function getApi(city) {
 
         console.log(data);
         console.log(data.city.name);
+        
     })
 }
 
 function searchButtonClick(event) {
+   
     if (!formInput.value){
     return;
     }
     event.preventDefault();
-    var city = formInput.value.trim();
+    var city = formInput.value;
     getApi(city)
-    formInput.value = '';
+    console.log(formInput.value);
 }
 
 getSearches();
-formInput.addEventListener('submit', searchButtonClick);
+searchButton.addEventListener('click', searchButtonClick);
+
 
 
 //Function to push 5 day forcast to h3
