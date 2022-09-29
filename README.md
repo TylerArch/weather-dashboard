@@ -18,13 +18,13 @@ Here is a screenshot of the landing page:
 
 Here is the link to the live webpage:
 
-https://tylerarch.github.io/project-tracker/
+https://tylerarch.github.io/weather-dashboard/
 
 
 ## Credits
 
-There were no collaborators on this Project Tracker.
+There were no collaborators on this Weather Dashboard.
 
 ## License
 
-No licensing was used in the creation of this Project tracker.
+No licensing was used in the creation of this Weather Dashboard.
