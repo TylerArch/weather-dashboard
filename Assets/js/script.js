@@ -17,17 +17,11 @@ let currentDay = null;
 
 //Function
 function showSearchHistory() {
-    console.log("Its working!");
-
     if (searchHistoryContainer.innerHTML) {
-        console.log("Its working!");
-
         searchHistoryContainer.innerHTML = "";
     }
     //Checking search history array for previous searches and creating the amount of buttons equal to the elements in the array
     for (var i = historyArr.length -1; i >= 0; i--) {
-        console.log("Its working!");
-
         console.log(i);
         const btn = document.createElement('button');
         btn.setAttribute('type', 'button');
@@ -44,7 +38,6 @@ function showSearchHistory() {
 function addToHistory(city) {
     //If nothing was searched return
     if(historyArr.indexOf(city) != -1){
-       console.log("Its working!");
             return;
     }
     //Push city to local storage in the history array
@@ -57,19 +50,14 @@ function addToHistory(city) {
 //Function to get the local storage items
 function getSearches() {
     var savedHistory = localStorage.getItem('search-history');
-    console.log("Its working!");
     if (savedHistory) {
-        console.log("Its working!");
         historyArr = JSON.parse(savedHistory);
-        console.log("nothing");
     } showSearchHistory();
 }
 
 //Function to get API
 function getApi(city) {
-    // var city = formInput.value
     var requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=188a51d5f423814817d69f7e3e5961b3`;
-
     fetch(requestUrl)
     .then(function (response) {
         return response.json();
@@ -79,9 +67,21 @@ function getApi(city) {
 
         console.log(data);
         console.log(data.city.name);
+        //Function to push 5 day forcast to h3
+sampleData.list.forEach(function (tsObj) {
+    const dateNum = moment.unix(tsObj.dt)
+    
+    if( dateNum !== currDay && weatherDays.length < 5 ){
+        weatherDays.push( tsObj )
+        currDay = dateNum
+      }
+    
+    })
         
     })
 }
+
+
 
 function searchButtonClick(event) {
    
@@ -100,22 +100,11 @@ searchButton.addEventListener('click', searchButtonClick);
 
 
 
-//Function to push 5 day forcast to h3
-
 
 
 
 //From Gary????
-// sampleData.list.forEach(function (tsObj) {
-//     const dateNum = moment.unix(tsObj.dt)
-//     const dateNum = dateObj.format("DDD")
 
-//     if( dateNum !== currDay && weatherDays.length < 5 ){
-//         weatherDays.push( tsObj )
-//         currDay = dateNum
-//       }
-    
-//     })
     
    
 //Event Listener
